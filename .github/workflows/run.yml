@@ -7,8 +7,8 @@ on:
       - '!.gitignore'
       - '!README.md'
   schedule:
-    # 每天早十点、晚六点十分各执行一次
-    - cron:  '10 10,18 * * *'
+    # 每天午夜执行
+    - cron:  '0 1 * * *'
 
 jobs:
   build:
@@ -21,6 +21,12 @@ jobs:
         with:
           python-version: '3.9'
       - run: pip install -r requirements.txt
+      - name: Random Wait
+        run: |
+          # 生成一个随机秒数，范围在0到86399之间（一天的秒数）
+          SECONDS_TO_WAIT=$((RANDOM % 86400))
+          echo "Waiting for $SECONDS_TO_WAIT seconds..."
+          sleep $SECONDS_TO_WAIT
       - name: Run
         env:
           INVITE_CODE: ${{secrets.INVITE_CODE}}
