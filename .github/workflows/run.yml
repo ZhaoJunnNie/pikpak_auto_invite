@@ -24,7 +24,7 @@ jobs:
       - name: Random Wait
         run: |
           # 生成一个随机秒数，范围在0到20000之间（一天的秒数）
-          SECONDS_TO_WAIT=$((RANDOM % 86400))
+          SECONDS_TO_WAIT=$((RANDOM % 20000))
           echo "Waiting for $SECONDS_TO_WAIT seconds..."
           sleep $SECONDS_TO_WAIT
       - name: Run
